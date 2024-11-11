@@ -1,0 +1,48 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}Nutrition Calculator{% endblock %}</title>
+        <link href="{% static 'style.css' %}" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% block script %}
+        {% endblock %}
+    </head>
+    <body>
+        <nav class="navbar">
+            <h1 class = "main-title">Nutrition Calculator</h1>        
+            <div class = "navbar-box">
+              <ul class="navbar-nav">
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" data-value = "{{user.id}}" id = "login_username">Username: <strong>{{ user.username }}</strong></a>
+                    </li>
+                    <li class = "nav-item">
+                        {% if user.gender == 1 %}
+                            <p class = "nav-gender">Gender: F</p>
+                        {% else %}
+                            <p class = "nav-gender">Gender: M</p>
+                        {% endif %}
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Log In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    </li>
+                {% endif %}
+              </ul>
+            </div>
+          </nav>
+        
+        <div class="body">
+            {% block body %}
+            {% endblock %}
+        </div>
+    </body>
+</html>

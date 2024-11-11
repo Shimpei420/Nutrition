@@ -1,0 +1,306 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block body %}
+<div id = "reference-part">
+    <h3 id = "reference-title">Reference</h3>
+    <table id = "reference-table">
+        <thead>
+            <tr>
+                <th>Gender</th>
+                <th>Kilocalories</th>
+                <th>Carbohydrate</th>
+                <th>Cholesterol</th>
+                <th>Fiber</th>
+                <th>Protein</th>
+                <th>Fat</th>
+                <th>Calcium</th>
+                <th>Copper</th>
+                <th>Iron</th>
+                <th>Magnesium</th>
+                <th>Manganese</th>
+                <th>Phosphorus</th>
+                <th>Potassium</th>
+                <th>Sodium</th>
+                <th>Zinc</th>
+                <th>Vitamin A_IU</th>
+                <th>Vitamin A_RAE</th>
+                <th>Vitamin B12</th>
+                <th>Vitamin B6</th>
+                <th>Vitamin C</th>
+                <th>Vitamin E</th>
+                <th>Vitamin K</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr id = "men-row">
+                <td>Men</td>
+                <td id = "men-kilocalories-value">2500 kcal</td>
+                <td id = "men-carbohydrate-value">330 g</td>
+                <td id = "men-cholesterol-value">300 mg</td>
+                <td id = "men-fiber-value">30 g</td>
+                <td id = "men-protein-value">55 g</td>
+                <td id = "men-fat-value">95 g</td>
+                <td id = "men-calcium-value">1000 mg</td>
+                <td id = "men-copper-value">1.2 mg</td>
+                <td id = "men-iron-value">16 mg</td>
+                <td id = "men-magnesium-value">400 mg</td>
+                <td id = "men-manganese-value">2.3 mg</td>
+                <td id = "men-phosphorus-value">600 mg</td>
+                <td id = "men-potassium-value">3500 mg</td>
+                <td id = "men-sodium-value">2000 mg</td>
+                <td id = "men-zinc-value">10 mg</td>
+                <td id = "men-vitaminA-IU-value">3000 IU</td>
+                <td id = "men-vitaminA-RAE-value">900 mcg</td>
+                <td id = "men-vitaminB12-value">2.4 mcg</td>
+                <td id = "men-vitaminB6-value">1.7 mcg</td>
+                <td id = "men-vitaminC-value">100 mg</td>
+                <td id = "men-vitaminE-value">6 mg</td>
+                <td id = "men-vitaminK-value">150 mcg</td>
+            </tr>
+            <tr id = "women-row">
+                <td>Women</td>
+                <td id = "women-kilocalories-value">2000 kcal</td>
+                <td id = "women-carbohydrate-value">275 g</td>
+                <td id = "women-cholesterol-value">300 mg</td>
+                <td id = "women-fiber-value">25 g</td>
+                <td id = "women-protein-value">45 g</td>
+                <td id = "women-fat-value">80 g</td>
+                <td id = "women-calcium-value">1200 mg</td>
+                <td id = "women-copper-value">0.9 mg</td>
+                <td id = "women-iron-value">18 mg</td>
+                <td id = "women-magnesium-value">300 mg</td>
+                <td id = "women-manganese-value">1.8 mg</td>
+                <td id = "women-phosphorus-value">600 mg</td>
+                <td id = "women-potassium-value">2600 mg</td>
+                <td id = "women-sodium-value">2000 mg</td>
+                <td id = "women-zinc-value">8 mg</td>
+                <td id = "women-vitaminA-IU-value">2300 IU</td>
+                <td id = "women-vitaminA-RAE-value">700 mcg</td>
+                <td id = "women-vitaminB12-value">2.4 mcg</td>
+                <td id = "women-vitaminB6-value">1.5 mcg</td>
+                <td id = "women-vitaminC-value">100 mg</td>
+                <td id = "women-vitaminE-value">15 mg</td>
+                <td id = "women-vitaminK-value">150 mcg</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+    <div id = "top-part">
+        <div id = "search-part">
+            <form id = "food-search" method = "POST">
+                {% csrf_token %}
+                <div class = "search-upper-part">
+                    <input type = "date" id = "date-input" name = "date">
+                    <select id = "meal-type-selection">
+                        <option value = "Breakfast">Breakfast</option>
+                        <option value = "Lunch">Lunch</option>
+                        <option value = "Dinner">Dinner</option>
+                    </select>
+                </div>
+                <div class = "search-bottom-part">
+                    <input type = "text" id = "food-input" name = 'food' autocomplete="off">
+                    <input type = "hidden" id = "food-id" name = "food-id">
+                    <input type = "number" id = "food-quantity" name = food-quantity><span>g</span>
+                    <input type = "submit" id = "add-button" value = "Add">
+                </div>
+            </form>
+            <div id = "food-suggest">
+                <ul id = "food-suggest-list">
+
+                </ul>
+            </div>
+            <a href = "{% url 'register_food' %}">You can add your food from here too!!</a>
+        </div>
+        <div id = "summary-part">
+            <div style = "display: flex">
+                <p class = "summary-title">Nutrition Summary on <span class = "summary-date">{{ date|date:"F, j, Y"}}</span></p>
+                <select id = "summary-select">
+                    <option value="" selected disabled>-----</option>
+                    <option value = "Breakfast">Breakfast</option>
+                    <option value = "Lunch">Lunch</option>
+                    <option value = "Dinner">Dinner</option>
+                </select>
+            </div>
+            
+            <ul id = "added-food-list">
+
+            </ul>
+            <div id = "search-">
+                <p id = kilocalories></p>
+                <p></p>
+                <table id = "today-nutrition-table">
+                    <tbody>
+                        <tr>
+                            <th>Carbohydrate</th>
+                            <th>Cholesterol</th>
+                            <th>Fiber</th>
+                            <th>Protein</th>
+                            <th>Fat</th>
+                            <th>Calcium</th>
+                            <th>Copper</th>
+                        </tr>
+                        <tr>
+                            <td id = "carbohydrate-value">0</td>
+                            <td id = "cholesterol-value">0</td>
+                            <td id = "fiber-value">0</td>
+                            <td id = "protein-value">0</td>
+                            <td id = "fat-value">0</td>
+                            <td id = "calcium-value">0</td>
+                            <td id = "copper-value">0</td>
+                        </tr>
+                        <tr>
+                            <th>Iron</th>
+                            <th>Magnesium</th>
+                            <th>Manganese</th>
+                            <th>Phosphorus</th>
+                            <th>Potassium</th>
+                            <th>Sodium</th>
+                            <th>Zinc</th>
+                        </tr>
+                        <tr>
+                            <td id = "iron-value">0</td>
+                            <td id = "magnesium-value">0</td>
+                            <td id = "manganese-value">0</td>
+                            <td id = "phosphorus-value">0</td>
+                            <td id = "potassium-value">0</td>
+                            <td id = "sodium-value">0</td>
+                            <td id = "zinc-value">0</td>
+                        </tr>
+                        <tr>
+                            <th>Vitamin A_IU</th>
+                            <th>Vitamin A_RAE</th>
+                            <th>Vitamin B12</th>
+                            <th>Vitamin B6</th>
+                            <th>Vitamin C</th>
+                            <th>Vitamin E</th>
+                            <th>Vitamin K</th>
+                        </tr>
+                        <tr>
+                            <td id = "vitaminA-IU-value">0</td>
+                            <td id = "vitaminA-RAE-value">0</td>
+                            <td id = "vitaminB12-value">0</td>
+                            <td id = "vitaminB6-value">0</td>
+                            <td id = "vitaminC-value">0</td>
+                            <td id = "vitaminE-value">0</td>
+                            <td id = "vitaminK-value">0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+                
+        </div>
+    </div>
+    <div id = "bottom-part">
+        <div id = "month-box">
+            <a id = "previous-month"><<</a>
+            <h3 id = "month-english"></h3>
+            <a id = "next-month">>></a>
+        </div>
+        <div id = "calendar-graph">
+            <div id = "bottom-left">          
+                <div id = "calendar-box">
+
+                </div>
+            </div>
+            <div id = "bottom-right">
+                <select id = "graph-value">
+                    <option>Kilocalories</option>
+                    <option>Carbohydrate</option>
+                    <option>Cholesterol</option>
+                    <option>Fiber</option>
+                    <option>Protein</option>
+                    <option>Fat</option>
+                    <option>Calcium</option>
+                    <option>Copper</option>
+                    <option>Iron</option>
+                    <option>Magnesium</option>
+                    <option>Manganese</option>
+                    <option>Phosphorus</option>
+                    <option>Potassium</option>
+                    <option>Sodium</option>
+                    <option>Zinc</option>
+                    <option>Vitamin A_IU</option>
+                    <option>Vitamin A_RAE</option>
+                    <option>Vitamin B12</option>
+                    <option>Vitamin B6</option>
+                    <option>Vitamin C</option>
+                    <option>Vitamin E</option>
+                    <option>Vitamin K</option>
+                </select>
+                <button id = "graph-button">Create Graph</button>
+                <p id = "unit-label"></p>
+                <div class = "canvas-parent">
+                    <canvas id="chart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div id = "calendar-search-result">
+            <div>
+                <h5 id = "search-no-result">No Data</h5>
+                <table id = "search-nutrition-table">
+                    <tr>
+                        <th>Kcal</th>
+                        <th>Carbohydrate</th>
+                        <th>Cholesterol</th>
+                        <th>Fiber</th>
+                        <th>Protein</th>
+                        <th>Fat</th>
+                        <th>Calcium</th>
+                        <th>Copper</th>
+                        <th>Iron</th>
+                        <th>Magnesium</th>
+                        <th>Manganese</th>
+                    </tr>
+                    <tr>
+                        <td id = "search-kilocalories-value">0</td>
+                        <td id = "search-carbohydrate-value">0</td>
+                        <td id = "search-cholesterol-value">0</td>
+                        <td id = "search-fiber-value">0</td>
+                        <td id = "search-protein-value">0</td>
+                        <td id = "search-fat-value">0</td>
+                        <td id = "search-calcium-value">0</td>
+                        <td id = "search-copper-value">0</td>
+                        <td id = "search-iron-value">0</td>
+                        <td id = "search-magnesium-value">0</td>
+                        <td id = "search-manganese-value">0</td>
+                    </tr>
+                    <tr>
+                        <th>Phosphorus</th>
+                        <th>Potassium</th>
+                        <th>Sodium</th>
+                        <th>Zinc</th>
+                        <th>Vitamin A_IU</th>
+                        <th>Vitamin A_RAE</th>
+                        <th>Vitamin B12</th>
+                        <th>Vitamin B6</th>
+                        <th>Vitamin C</th>
+                        <th>Vitamin E</th>
+                        <th>Vitamin K</th>
+                    </tr>
+                    <tr>
+                        <td id = "search-phosphorus-value">0</td>
+                        <td id = "search-potassium-value">0</td>
+                        <td id = "search-sodium-value">0</td>
+                        <td id = "search-zinc-value">0</td>
+                        <td id = "search-vitaminA-IU-value">0</td>
+                        <td id = "search-vitaminA-RAE-value">0</td>
+                        <td id = "search-vitaminB12-value">0</td>
+                        <td id = "search-vitaminB6-value">0</td>
+                        <td id = "search-vitaminC-value">0</td>
+                        <td id = "search-vitaminE-value">0</td>
+                        <td id = "search-vitaminK-value">0</td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'main.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script>
+{% endblock %}

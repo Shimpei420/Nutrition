@@ -1,0 +1,116 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block body%}
+<div id = "modal-box">
+    <div id = "modal">
+        <input type = 'text' id = "modal-input">
+        <ul id = "category-list">
+            
+        </ul>
+        <button id = "modal-close">Close</button>
+    </div>
+</div>
+<div id = "main-form">
+    <div class = "food-register-title-box">
+        <div class = "space"></div>
+        <h3 class = "food-register-title">Food Register</h3>
+        <a href = "{% url 'main' %}" class = "main-back-button">Back To Main</a>
+    </div>
+
+    <p class = "per">(Per 100g)</p>
+    <form id = "food-register-form" action = "{% url 'register_food' %}" method = "POST">
+        {% csrf_token %}
+        <div class = "food-register-category-kilocalories-box">
+            <div class = "food-register-category-box">
+                <p class = "category-title">Category : </p>
+                <input type = "text" id = "category-selection" autocomplete="off">
+                <input type = "hidden" id = "category-selection-id" name = "category-id">
+            </div>
+            <div class = "food-register-kilocalories-box">
+                <p class = "food-register-item">Kilocalories : </p><input type = "number" name = "kilocalories" class = "food-register-input" value = 0>kcal
+            </div>
+        </div>
+        <div class = "food-register-description-box">
+            <p class = "food-register-item">Description : </p><input type = "text" name = "description" class = "food-register-description-input" autocomplete="off">
+        </div>
+        <div class = "food-register-box">
+            <div class = "food-register-item-right">
+                <div class = "food-register-item-box">
+                    <p class = "food-register-item">Carbohydrate : </p><input type = "number" name = "carbohydrate" class = "food-register-input" value = 0>g
+                </div>
+                <div class = "food-register-item-box">
+                    <p class = "food-register-item">Cholesterol : </p><input type = "number" name = "cholesterol" class = "food-register-input" value = 0>mg
+                </div>
+                <div class = "food-register-item-box">
+                    <p class = "food-register-item">Fiber : </p><input type = "number" name = "fiber" class = "food-register-input" value = 0>g
+                </div>
+                <div class = "food-register-item-box">
+                    <p class = "food-register-item">Protein : </p><input type = "number" name = "protein" class = "food-register-input" value = 0>g
+                </div>
+                <div class = "food-register-item-box">
+                    <p class = "food-register-item">Fat : </p><input type = "number" name = "fat" class = "food-register-input" value = 0>g
+                </div>
+                <div class = "food-register-item-box">
+                    <p class = "food-register-item">Calcium : </p><input type = "number" name = "calcium" class = "food-register-input" value = 0>mg
+                </div>
+                <div class = "food-register-item-box">
+                    <p class = "food-register-item">Copper : </p><input type = "number" name = "copper" class = "food-register-input" value = 0>mg
+                </div>
+            </div>
+            <div class = "food-register-item-middle">
+                <div class = "food-register-item-box">
+                    <p class = "food-register-item">Iron : </p><input type = "number" name = "iron" class = "food-register-input" value = 0>mg
+                </div>
+                <div class = "food-register-item-box">
+                    <p class = "food-register-item">Magnesium : </p><input type = "number" name = "magnesium" class = "food-register-input" value = 0>mg
+                </div>
+                <div class = "food-register-item-box">
+                    <p class = "food-register-item">Manganese : </p><input type = "number" name = "manganese" class = "food-register-input" value = 0>mg
+                </div>
+                <div class = "food-register-item-box">
+                    <p class = "food-register-item">Phosphorus : </p><input type = "number" name = "phosphorus" class = "food-register-input" value = 0>mg
+                </div>
+                <div class = "food-register-item-box">
+                    <p class = "food-register-item">Potassium : </p><input type = "number" name = "potassium" class = "food-register-input" value = 0>mg
+                </div>
+                <div class = "food-register-item-box">
+                    <p class = "food-register-item">Sodium : </p><input type = "number" name = "sodium" class = "food-register-input" value = 0>mg
+                </div>
+                <div class = "food-register-item-box">
+                    <p class = "food-register-item">Zinc : </p><input type = "number" name = "zinc" class = "food-register-input" value = 0>mg
+                </div>
+            </div>
+            <div class = "food-register-item-left">
+                <div class = "food-register-item-box">
+                    <p class = "food-register-item">Vitamin A_IU : </p><input type = "number" name = "vitaminA_IU" class = "food-register-input" value = 0>IU
+                </div>
+                <div class = "food-register-item-box">
+                    <p class = "food-register-item">Vitamin A_RAE : </p><input type = "number" name = "vitaminA_RAE" class = "food-register-input" value = 0>mcg
+                </div>
+                <div class = "food-register-item-box">
+                    <p class = "food-register-item">VItamin B12 : </p><input type = "number" name = "vitaminB12" class = "food-register-input" value = 0>mcg
+                </div>
+                <div class = "food-register-item-box">
+                    <p class = "food-register-item">VItamin B6 : </p><input type = "number" name = "vitaminB6" class = "food-register-input" value = 0>mg
+                </div>
+                <div class = "food-register-item-box">
+                    <p class = "food-register-item">Vitamin C : </p><input type = "number" name = "vitaminC" class = "food-register-input" value = 0>mg
+                </div>
+                <div class = "food-register-item-box">
+                    <p class = "food-register-item">Vitamin E : </p><input type = "number" name = "vitaminE" class = "food-register-input" value = 0>mg
+                </div>
+                <div class = "food-register-item-box">
+                    <p class = "food-register-item">Vitamin K : </p><input type = "number" name = "vitaminK" class = "food-register-input" value = 0>mg
+                </div>
+            </div>
+        </div>
+        <input type = "submit" value = "Register" class = "food-register-button" id = "register-button">
+    </form>
+</div>
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'register.js' %}"></script>
+{% endblock %}
